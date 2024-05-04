@@ -70,32 +70,32 @@ try {
     [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
     $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
 
-    if ($fontFamilies -notcontains "CaskaydiaCove NF") {
+    if ($fontFamilies -notcontains "0xProto NF") {
         $webClient = New-Object System.Net.WebClient
-        $webClient.DownloadFileAsync((New-Object System.Uri("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip")), ".\CascadiaCode.zip")
+        $webClient.DownloadFileAsync((New-Object System.Uri("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip")), ".\0xProto.zip")
         
         while ($webClient.IsBusy) {
             Start-Sleep -Seconds 2
         }
 
-        Expand-Archive -Path ".\CascadiaCode.zip" -DestinationPath ".\CascadiaCode" -Force
+        Expand-Archive -Path ".\0xProto.zip" -DestinationPath ".\0xProto" -Force
         $destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
-        Get-ChildItem -Path ".\CascadiaCode" -Recurse -Filter "*.ttf" | ForEach-Object {
+        Get-ChildItem -Path ".\0xProto" -Recurse -Filter "*.ttf" | ForEach-Object {
             If (-not(Test-Path "C:\Windows\Fonts\$($_.Name)")) {        
                 $destination.CopyHere($_.FullName, 0x10)
             }
         }
 
-        Remove-Item -Path ".\CascadiaCode" -Recurse -Force
-        Remove-Item -Path ".\CascadiaCode.zip" -Force
+        Remove-Item -Path ".\0xProto" -Recurse -Force
+        Remove-Item -Path ".\0xProto.zip" -Force
     }
 }
 catch {
-    Write-Error "Failed to download or install the Cascadia Code font. Error: $_"
+    Write-Error "Failed to download or install the 0xProto font. Error: $_"
 }
 
 # Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "CaskaydiaCove NF")) {
+if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "0xProto NF")) {
     Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
