@@ -41,7 +41,7 @@ function Update-FastFetch {
 
 Update-FastFetch
 
-#Display Fastfetch
+# Display Fastfetch
 cls
 fastfetch
 
