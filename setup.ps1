@@ -119,6 +119,7 @@ catch {
 
 # Fastfetch install
 scoop install fastfetch
+Rename-Item -Path "~/.config/fastfetch/config.jsonc" -NewName ("config." + (Get-Date -Format 'dd-MM-yyyy.HH.mm.ss') + ".jsonc") -erroraction 'silentlycontinue'
 fastfetch --gen-config
 del ~\.config\fastfetch\config.jsonc
 Copy-Item -Path ~\scoop\apps\fastfetch\current\presets\paleofetch.jsonc -Destination ~/.config/fastfetch/config.jsonc
