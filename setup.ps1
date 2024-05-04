@@ -109,6 +109,20 @@ catch {
     Write-Error "Failed to install Chocolatey. Error: $_"
 }
 
+# Scoop install 
+try {
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh'))
+}
+catch {
+    Write-Error "Failed to install Scoop. Error: $_"
+}
+
+# Fastfetch install
+scoop install fastfetch
+fastfetch --gen-config
+del ~\.config\fastfetch\config.jsonc
+Copy-Item -Path ~\scoop\apps\fastfetch\current\presets\paleofetch.jsonc -Destination ~/.config/fastfetch/config.jsonc
+
 # Terminal Icons Install
 try {
     Install-Module -Name Terminal-Icons -Repository PSGallery -Force
