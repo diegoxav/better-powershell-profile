@@ -114,8 +114,7 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Host "Scoop is not installed. Installing Scoop..."
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 } else {
-    Write-Host "Scoop is already installed. Updating Scoop..."
-    scoop update
+    Write-Host "Scoop is already installed."
 }
 
 # Fastfetch install
