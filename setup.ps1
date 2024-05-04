@@ -117,6 +117,10 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Host "Scoop is already installed."
 }
 
+# Make Scoop downloads faster
+scoop install aria2
+scoop config aria2-warning-enabled false
+
 # Fastfetch install
 scoop install fastfetch
 Rename-Item -Path "~/.config/fastfetch/config.jsonc" -NewName ("config." + (Get-Date -Format 'dd-MM-yyyy.HH.mm.ss') + ".jsonc") -erroraction 'silentlycontinue'
