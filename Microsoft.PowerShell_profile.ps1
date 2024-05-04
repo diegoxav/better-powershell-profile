@@ -17,6 +17,32 @@ if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
 
+# Check for Fastfetch Updates
+function Update-FastFetch {
+    if (-not $global:canConnectToGitHub) {
+        return
+    }
+
+    try {
+        $updateNeeded = $false
+        $currentVersion = Get-Command fastfetch | Select-Object -ExpandProperty Version
+        $gitHubApiUrl = "https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest"
+        $latestReleaseInfo = Invoke-RestMethod -Uri $gitHubApiUrl
+        $latestVersion = $latestReleaseInfo.tag_name.Trim('v')
+        if ($currentVersion -lt $latestVersion) {
+            $updateNeeded = $true
+        }
+
+        if ($updateNeeded) {
+            scoop update fastfetch
+        }
+    } catch {
+        Write-Error "Failed to update FastFetch. Error: $_"
+    }
+}
+
+Update-FastFetch
+
 # Check for Profile Updates
 function Update-Profile {
     if (-not $global:canConnectToGitHub) {
