@@ -7,7 +7,7 @@ A stylish and functional PowerShell profile that looks and feels almost as good 
 Execute the following command in an elevated PowerShell window to install the PowerShell profile:
 
 ```
-irm cutt.ly/powerprofile | iex
+pwsh "irm cutt.ly/powerprofile | iex"
 ```
 
 ## 🛠️ Fix the Missing Font
