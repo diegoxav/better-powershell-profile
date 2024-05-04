@@ -70,7 +70,7 @@ try {
     [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
     $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
 
-    if ($fontFamilies -notcontains "0xProto NF") {
+    if ($fontFamilies -notcontains "0xProto Nerd Font") {
         $webClient = New-Object System.Net.WebClient
         $webClient.DownloadFileAsync((New-Object System.Uri("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip")), ".\0xProto.zip")
         
@@ -95,7 +95,7 @@ catch {
 }
 
 # Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "0xProto NF")) {
+if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "0xProto Nerd Font")) {
     Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
@@ -111,7 +111,7 @@ catch {
 
 # Scoop install 
 try {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh'))
+    Set-ExecutionPolicy Bypass -Scope Process -Force; iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
 }
 catch {
     Write-Error "Failed to install Scoop. Error: $_"
