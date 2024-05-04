@@ -109,12 +109,13 @@ catch {
     Write-Error "Failed to install Chocolatey. Error: $_"
 }
 
-# Scoop install 
-try {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-}
-catch {
-    Write-Error "Failed to install Scoop. Error: $_"
+# Scoop install
+if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+    Write-Host "Scoop is not installed. Installing Scoop..."
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+} else {
+    Write-Host "Scoop is already installed. Updating Scoop..."
+    scoop update
 }
 
 # Fastfetch install
