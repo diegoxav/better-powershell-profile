@@ -1,7 +1,7 @@
 ### PowerShell Profile Refactor
 ### Version 1.03 - Refactored
 cls
-fastfetch
+fastfetch -l "Windows 7"
 
 # Initial GitHub.com connectivity check with 1 second timeout
 $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
@@ -45,7 +45,7 @@ Update-FastFetch
 
 # Display Fastfetch
 cls
-fastfetch
+fastfetch -l "Windows 7"
 
 # Check for Profile Updates
 function Update-Profile {
