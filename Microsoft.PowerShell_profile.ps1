@@ -174,11 +174,11 @@ function hb {
         return
     }
     
-    $uri = "http://bin.christitus.com/documents"
+    $uri = "http://localhost:8290/documents"
     try {
         $response = Invoke-RestMethod -Uri $uri -Method Post -Body $Content -ErrorAction Stop
         $hasteKey = $response.key
-        $url = "http://bin.christitus.com/$hasteKey"
+        $url = "http://localhost:8290/$hasteKey"
         Write-Output $url
     } catch {
         Write-Error "Failed to upload the document. Error: $_"
