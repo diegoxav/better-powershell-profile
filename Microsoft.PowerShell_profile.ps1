@@ -284,6 +284,12 @@ function pst { Get-Clipboard }
 # scoop -> apt
 Set-Alias -Name "apt" scoop
 
+# choco -> pacman (kinda)
+Set-Alias -Name "pacman" choco
+
+# GUI is bloat
+function youtube { yt-dlp $args -o - | mplayer -cache 64000 -vo caca - }
+
 # Enhanced PowerShell Experience
 Set-PSReadLineOption -Colors @{
     Command = 'Yellow'
